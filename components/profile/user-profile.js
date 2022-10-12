@@ -1,8 +1,15 @@
-import ProfileForm from './profile-form';
-import classes from './user-profile.module.css';
+import ProfileForm from "./profile-form";
+import classes from "./user-profile.module.css";
 
 function UserProfile() {
-  // Redirect away if NOT auth
+  // const { data: session } = useSession();
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   if (!session) {
+  //     router.push("/auth");
+  //   }
+  // }, [session]);
 
   return (
     <section className={classes.profile}>
