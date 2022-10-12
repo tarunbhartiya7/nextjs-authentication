@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import classes from "./auth-form.module.css";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
@@ -16,6 +17,15 @@ function AuthForm() {
     const password = passwordInputRef.current.value;
 
     if (isLogin) {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+      console.log(result);
+      if (!result.error) {
+        //
+      }
     } else {
       const response = await fetch("/api/auth/signup", {
         method: "POST",

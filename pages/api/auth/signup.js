@@ -10,13 +10,16 @@ export default async function handler(req, res) {
       return res.status(422).send({ message: "Invalid credentials!" });
     }
 
+    const user = await User.findOne({ email });
+    if (user) {
+      return res.status(422).send({ message: "User already exists!" });
+    }
+
     const hashedPassword = await hashPassword(password);
-    console.log(hashedPassword);
 
     await connectToDatabase();
-    const response = await User.create({ email, password: hashedPassword });
+    await User.create({ email, password: hashedPassword });
 
-    console.log("response", response);
     return res.status(201).send({ message: "Signed up!" });
   }
 }
